@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { getHello } from "./services/api";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginPage from "./login/pages/LoginPage";
+import Register from "./register/pages/RegisterPage";
 
-function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    getHello().then(setMessage);
-  }, []);
-
+const App: React.FC = () => {
   return (
-    <div>
-      <p>{message}</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
+        {/* <Route path="/home" element={<Home />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
