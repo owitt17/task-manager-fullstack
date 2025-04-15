@@ -30,7 +30,7 @@ const Register: React.FC = () => {
       setMessage(res.data.message);
       setRegisterDetails({ fullName: "", username: "", password: "", retypePassword: "" });
     } catch (err: any) {
-      setError(err.response?.data?.message || "Something went wrong");
+      setError(err.response?.data?.message || "Something went wrong: " + err);
     } finally {
       setIsLoading(false);
     }
@@ -48,6 +48,20 @@ const Register: React.FC = () => {
         {message && (
           <div className="text-green-600 mb-4 text-center">{message}</div>
         )}
+
+        <div className="mb-4">
+          <label htmlFor="fullname" className="block font-semibold mb-1">
+            Full Name
+          </label>
+          <input
+            type="text"
+            name="fullName"
+            value={registerDetails.fullName}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+          />
+        </div>
 
         <div className="mb-4">
           <label htmlFor="username" className="block font-semibold mb-1">
