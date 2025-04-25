@@ -26,11 +26,21 @@ const Register: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const res = await axios.post("/api/auth/register", registerDetails);
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE}/api/auth/register`,
+        registerDetails,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log('Response:', res);
       setMessage(res.data.message);
       setRegisterDetails({ fullName: "", username: "", password: "", retypePassword: "" });
     } catch (err: any) {
-      setError(err.response?.data?.message || "Something went wrong: " + err);
+      console.error('Full error:', err);
+      setError(err.response?.data?.message || err.message || "Something went wrong");
     } finally {
       setIsLoading(false);
     }
