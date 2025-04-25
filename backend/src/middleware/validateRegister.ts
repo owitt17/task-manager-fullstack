@@ -7,6 +7,7 @@ export const validateRegister = (
 ) => {
     try {
         const { fullName, username, password, retypePassword } = req.body;
+        console.log('Request body:', {fullName, username, password: '***', retypePassword: '***' });
 
     if (!fullName || !username || !password || !retypePassword) {
         res.status(400).json({ message: "Please fill all fields" });
@@ -14,7 +15,7 @@ export const validateRegister = (
     }
     
     if (password !== retypePassword) {
-        res.status(400).json({ message: "Passwords do not match!"});
+        res.status(400).json({ message: "Password you entered does not match" });
         return;
     }
 
@@ -22,6 +23,7 @@ export const validateRegister = (
         res.status(400).json({ message: "Password must be at least 6 characters"});
         return;
     }
+
 
     next();
     } catch (error) {
